@@ -1,7 +1,9 @@
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("modificació a la meva branca");
 
+        Publications p = Publications.addPublication();
+
+        System.out.println(p.toString());
     }
 }
