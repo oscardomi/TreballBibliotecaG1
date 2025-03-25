@@ -5,6 +5,7 @@ public class User {
     private String userID;
     private String userName;
     private String userType;
+    public static ArrayList<User> userList = new ArrayList<>();
     private static final Scanner sc = new Scanner(System.in);
 
     //Constructors
@@ -17,6 +18,11 @@ public class User {
         this.userID = userID;
         this.userName = userName;
         this.userType = "Customer";
+    }
+    public User(String userID, String userName, String userType){
+        this.userID = userID;
+        this.userName = userName;
+        this.userType = userType;
     }
 
     //Getters and setters
@@ -47,9 +53,8 @@ public class User {
 
     /**
      * Adds a new user with a predefined Customer user type.
-     * @param userList List of users
      */
-    public static void addUser(ArrayList<User> userList) {
+    public static void addUser() {
         System.out.println("What name do you want to give the user?");
         String name = sc.nextLine();
         userList.add(new User(String.valueOf((userList.size() + 1)), name));
@@ -69,23 +74,14 @@ public class User {
 
     /**
      * Asks for a user ID to update the user's details.
-     * @param userList List of users
      */
-    public void updateUser(ArrayList<User> userList) {
+    public void updateUser() {
         boolean userFound = false;
 
         //Checks if the user has permission to update information
         if (userType.equalsIgnoreCase("Customer")) {
             System.out.println("You don't have permission to update users.");
         } else {
-            System.out.println("Write the ID of the user that you want to change: ");
-            String oldID = sc.nextLine();
-
-            //Searches for the user in the user arraylist
-            for (User user : userList) {
-                if (user.userID.equals(oldID)) {
-                    userFound = true;
-
                     System.out.println("Enter the new name: ");
                     user.setUserName(sc.nextLine());
 
@@ -106,35 +102,23 @@ public class User {
 
                     System.out.println("User successfully updated.");
                 }
-            }
-
-            if (!userFound) {
-                System.out.println("User not found.");
-            }
-
-        }
-
     }
 
     /**
      * Removes a user from the system.
-     * @param userList List of users.
      */
-    public void removeUser(ArrayList<User> userList){
+    public void removeUser(){
         boolean userFound = false;
 
         //Checks if the user has permission to update information
         if (userType.equalsIgnoreCase("Customer")) {
-            System.out.println("You don't have permission to update users.");
+            System.out.println("You don't have permission to remove users.");
         } else {
-            System.out.println("Write the ID of the user that you want to remove: ");
-            String userID = sc.nextLine();
-
             //Searches for the user in the user arraylist
             for (User user : userList) {
                 if (user.userID.equals(userID)) {
                     userFound = true;
-                    user.removeUser(userList);
+                    user.removeUser();
                     System.out.println("User successfully removed.");
                 }
             }
@@ -146,3 +130,4 @@ public class User {
         }
     }
 }
+
