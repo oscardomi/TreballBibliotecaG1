@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class User {
     private String userID;
     private String userName;
+    private String userPassword;
     private String userType;
     public static ArrayList<User> userList = new ArrayList<>();
     private static final Scanner sc = new Scanner(System.in);
@@ -12,16 +13,21 @@ public class User {
     public User() {
         this.userID = "";
         this.userName = "";
+        this.userPassword = "";
         this.userType = "Customer";
     }
-    public User(String userID, String userName) {
+
+    public User(String userID, String userName, String userPassword) {
         this.userID = userID;
         this.userName = userName;
+        this.userPassword = userPassword;
         this.userType = "Customer";
     }
-    public User(String userID, String userName, String userType){
+
+    public User(String userID, String userName, String userPassword,String userType) {
         this.userID = userID;
         this.userName = userName;
+        this.userPassword = userPassword;
         this.userType = userType;
     }
 
@@ -50,6 +56,18 @@ public class User {
             System.err.println("You don't have permission to change the user type.");
         } else this.userType = userType;
     }
+    public String getUserPassword() {
+        return userPassword;
+    }
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+    public static ArrayList<User> getUserList() {
+        return userList;
+    }
+    public static void setUserList(ArrayList<User> userList) {
+        User.userList = userList;
+    }
 
     /**
      * Adds a new user with a predefined Customer user type.
@@ -57,11 +75,14 @@ public class User {
     public static void addUser() {
         System.out.println("What name do you want to give the user?");
         String name = sc.nextLine();
-        userList.add(new User(String.valueOf((userList.size() + 1)), name));
+        System.out.println("What password do you want to give the user?");
+        String password = sc.nextLine();
+        userList.add(new User(String.valueOf((userList.size() + 1)), name, password));
     }
 
     /**
      * Override method that shows a user's information.
+     *
      * @return User's information.
      */
     @Override
@@ -76,58 +97,35 @@ public class User {
      * Asks for a user ID to update the user's details.
      */
     public void updateUser() {
-        boolean userFound = false;
+        System.out.println("Enter the new name: ");
+        userName = sc.nextLine();
+        System.out.println("Enter the new password: ");
+        userPassword = sc.nextLine();
+        boolean validUserType = false;
 
-        //Checks if the user has permission to update information
-        if (userType.equalsIgnoreCase("Customer")) {
-            System.out.println("You don't have permission to update users.");
-        } else {
-                    System.out.println("Enter the new name: ");
-                    user.setUserName(sc.nextLine());
+        //Ensures that the user type is amongst "Customer", "Administrator" or "Librarian".
+        do {
+            System.out.println("Enter the new user type: ");
+            String newUserType = sc.nextLine();
+            if (newUserType.equalsIgnoreCase("Customer") || newUserType.equalsIgnoreCase("Administrator") || newUserType.equalsIgnoreCase("Librarian")) {
+                userType = newUserType;
+                validUserType = true;
+            } else {
+                System.out.println("Invalid user type. Users can only be 'Customer', 'Administrator' or 'Librarian'.");
+            }
 
-                    boolean validUserType = false;
+        } while (!validUserType);
 
-                    //Ensures that the user type is amongst "Customer", "Administrator" or "Librarian".
-                    do {
-                        System.out.println("Enter the new user type: ");
-                        String newUserType = sc.nextLine();
-                        if (newUserType.equalsIgnoreCase("Customer") || newUserType.equalsIgnoreCase("Administrator") || newUserType.equalsIgnoreCase("Librarian")) {
-                            user.setUserType(newUserType);
-                            validUserType = true;
-                        } else {
-                            System.out.println("Invalid user type. Users can only be 'Customer', 'Administrator' or 'Librarian'.");
-                        }
+        System.out.println("User successfully updated.");
 
-                    } while (!validUserType);
-
-                    System.out.println("User successfully updated.");
-                }
     }
 
     /**
      * Removes a user from the system.
      */
-    public void removeUser(){
-        boolean userFound = false;
-
-        //Checks if the user has permission to update information
-        if (userType.equalsIgnoreCase("Customer")) {
-            System.out.println("You don't have permission to remove users.");
-        } else {
-            //Searches for the user in the user arraylist
-            for (User user : userList) {
-                if (user.userID.equals(userID)) {
-                    userFound = true;
-                    user.removeUser();
-                    System.out.println("User successfully removed.");
-                }
-            }
-
-            if (!userFound) {
-                System.out.println("User not found.");
-            }
-
-        }
+    public void removeUser() {
+        userList.remove(this);
+        System.out.println("User successfully removed.");
     }
 }
 
