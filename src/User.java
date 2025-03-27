@@ -89,8 +89,7 @@ public class User {
     public String toString() {
         return "UserID: " + userID +
                 "\nUsername= " + userName +
-                "\nUsertype= " + userType +
-                '}';
+                "\nUsertype= " + userType;
     }
 
     /**
@@ -126,5 +125,11 @@ public class User {
     public void removeUser() {
         userList.remove(this);
         System.out.println("User successfully removed.");
+    }
+
+    public void addRent() {
+        System.out.println("""
+                   
+                """);
     }
 }
