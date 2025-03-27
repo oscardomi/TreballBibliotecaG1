@@ -89,8 +89,7 @@ public class User {
     public String toString() {
         return "UserID: " + userID +
                 "\nUsername= " + userName +
-                "\nUsertype= " + userType +
-                '}';
+                "\nUsertype= " + userType;
     }
 
     /**
