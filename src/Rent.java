@@ -15,6 +15,13 @@ public class Rent {
         this.returnDate = returnDate;
     }
 
+    public Rent() {
+        this.ID = ID;
+        this.userID = userID;
+        this.rentDate = rentDate;
+        this.returnDate = returnDate;
+    }
+
 
     //Getters
     public String getID() {

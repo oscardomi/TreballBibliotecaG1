@@ -9,7 +9,7 @@ public class Publications {
     private String type;
     private int quantity;
 
-    private static ArrayList<Publications> publicationsList = new ArrayList<>();
+    public static ArrayList<Publications> publicationsList = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in); // Scanner compartido
 
     // Constructors
@@ -46,24 +46,71 @@ public class Publications {
     public void setQuantity(int quantity) { this.quantity = quantity; }
 
     // Methods
-    public static void addPublication(Publications pub) {
+    public static void addPublication() {
         System.out.println("Write the ID of the publication you want to add: ");
         String ID = sc.nextLine();
-        pub.setID(ID);
+
 
         System.out.println("Write the name of the publication: ");
         String name = sc.nextLine();
-        pub.setName(name);
+
 
         System.out.println("Write the genre of the publication: ");
         String genre = sc.nextLine();
-        pub.setGenre(genre);
+
 
         System.out.println("Write the type of the publication: ");
         String type = sc.nextLine();
-        pub.setType(type);
 
+
+        publicationsList.add(new Publications(ID, name, genre, type, 1));
         System.out.println("Publication added successfully!");
+    }
+
+    public static void searchPublication(){
+        System.out.println("Com vols buscar la publicacio?" +
+                "By ID: 1" +
+                "By name: 2");
+
+        int option = Integer.parseInt(sc.nextLine());
+
+        switch (option){
+            case 1:
+                System.out.println("Digues l'ID de la publicacio que vols buscar: ");
+                String searchId = sc.nextLine();
+                boolean founded = false;
+
+                for (int i = 0; i < publicationsList.size(); i++) {
+                    if (publicationsList.get(i).getID().equals(searchId)){
+                        System.out.println(publicationsList.get(i));
+                        founded = true;
+                        break;
+                    }
+                }
+                if (!founded){
+                    System.out.println("Not in our database");
+                }
+                break;
+            case 2:
+                System.out.println("Digues el nom de la publicacio que vols buscar: ");
+                String searchName = sc.nextLine();
+                boolean founded2 = false;
+
+                for (int i = 0; i < publicationsList.size(); i++) {
+                    if (publicationsList.get(i).getName().equals(searchName)){
+                        System.out.println(publicationsList.get(i));
+                        founded2 = true;
+                        break;
+                    }
+                }
+                if (!founded2){
+                    System.out.println("Not in our batabase");
+                }
+                break;
+            default:
+                System.out.println("Invalid option");
+                break;
+        }
     }
 
     @Override
