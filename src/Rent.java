@@ -2,17 +2,24 @@ import java.util.Date;
 
 public class Rent {
     private String ID;
-    private String userID;
+    private User rentUser;
     private Date rentDate;
     private Date returnDate;
 
 
     //Constructor
-    public Rent(String ID, String userID, Date rentDate, Date returnDate) {
+    public Rent(String ID, User rentUser, Date rentDate, Date returnDate) {
         this.ID = ID;
-        this.userID = userID;
+        this.rentUser = rentUser;
         this.rentDate = rentDate;
         this.returnDate = returnDate;
+    }
+
+    public Rent() {
+        this.ID = "";
+        this.rentUser = null;
+        this.rentDate = null;
+        this.returnDate = null;
     }
 
 
@@ -21,8 +28,8 @@ public class Rent {
         return ID;
     }
 
-    public String getUserID() {
-        return userID;
+    public User getRentUser() {
+        return rentUser;
     }
 
     public Date getRentDate() {
@@ -39,8 +46,8 @@ public class Rent {
         this.ID = ID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setRentUser(User rentUser) {
+        this.rentUser = rentUser;
     }
 
     public void setRentDate(Date rentDate) {
@@ -58,7 +65,7 @@ public class Rent {
         return "===== Rent =====\n" +
                 " ID: '" + ID + '\n' +
                 "--------------------\n" +
-                " User ID: '" + userID + '\n' +
+                " User: '" + rentUser.getUserName() + '\n' +
                 "--------------------\n" +
                 " Rent date: " + rentDate + '\n' +
                 "--------------------\n" +
