@@ -5,6 +5,7 @@ public class Rent {
     private User rentUser;
     private Date rentDate;
     private Date returnDate;
+    public static int rentCount = 0;
 
 
     //Constructor

@@ -67,49 +67,37 @@ public class Publications {
         System.out.println("Publication added successfully!");
     }
 
-    public static void searchPublication(){
+    public static Publications searchPublication(){
         System.out.println("Com vols buscar la publicacio?" +
                 "By ID: 1" +
                 "By name: 2");
 
         int option = Integer.parseInt(sc.nextLine());
 
-        switch (option){
-            case 1:
+        switch (option) {
+            case 1 -> {
                 System.out.println("Digues l'ID de la publicacio que vols buscar: ");
                 String searchId = sc.nextLine();
-                boolean founded = false;
 
                 for (int i = 0; i < publicationsList.size(); i++) {
-                    if (publicationsList.get(i).getID().equals(searchId)){
-                        System.out.println(publicationsList.get(i));
-                        founded = true;
-                        break;
+                    if (publicationsList.get(i).getID().equals(searchId)) {
+                        return publicationsList.get(i);
                     }
                 }
-                if (!founded){
                     System.out.println("Not in our database");
-                }
-                break;
-            case 2:
+            }
+            case 2 -> {
                 System.out.println("Digues el nom de la publicacio que vols buscar: ");
                 String searchName = sc.nextLine();
-                boolean founded2 = false;
 
                 for (int i = 0; i < publicationsList.size(); i++) {
-                    if (publicationsList.get(i).getName().equals(searchName)){
-                        System.out.println(publicationsList.get(i));
-                        founded2 = true;
-                        break;
+                    if (publicationsList.get(i).getName().equals(searchName)) {
+                        return publicationsList.get(i);
                     }
                 }
-                if (!founded2){
                     System.out.println("Not in our batabase");
-                }
-                break;
-            default:
-                System.out.println("Invalid option");
-                break;
+            }
+            default -> System.out.println("Invalid option");
         }
     }
 

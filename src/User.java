@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class User {
@@ -8,6 +9,7 @@ public class User {
     private String userType;
     public static ArrayList<User> userList = new ArrayList<>();
     private static final Scanner sc = new Scanner(System.in);
+    private ArrayList<Rent> userRents = new ArrayList<>();
 
     //Constructors
     public User() {
@@ -128,8 +130,7 @@ public class User {
     }
 
     public void addRent() {
-        System.out.println("""
-                   
-                """);
+        Publications publication = Publications.searchPublication();
+        userRents.add(new Rent(Rent.rentCount+1, this.User, Date.from(), Date.from()+30));
     }
 }
