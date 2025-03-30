@@ -24,7 +24,7 @@ public class Rent {
     }
 
 
-    //Getters
+    //Getters and setters
     public String getID() {
         return ID;
     }
@@ -40,9 +40,6 @@ public class Rent {
     public Date getReturnDate() {
         return returnDate;
     }
-
-
-    //Setters
     public void setID(String ID) {
         this.ID = ID;
     }
