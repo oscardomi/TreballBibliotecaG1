@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class User {
@@ -7,9 +8,7 @@ public class User {
     private String userName;
     private String userPassword;
     private String userType;
-    public static ArrayList<User> userList = new ArrayList<>();
     private static final Scanner sc = new Scanner(System.in);
-    private ArrayList<Rent> userRents = new ArrayList<>();
 
     //Constructors
     public User() {
@@ -26,7 +25,7 @@ public class User {
         this.userType = "Customer";
     }
 
-    public User(String userID, String userName, String userPassword,String userType) {
+    public User(String userID, String userName, String userPassword, String userType) {
         this.userID = userID;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -37,49 +36,50 @@ public class User {
     public java.lang.String getUserID() {
         return userID;
     }
+
     public void setUserID(java.lang.String userID) {
         if (userType.equalsIgnoreCase("Customer")) {
             System.err.println("You don't have permission to change the ID.");
         } else this.userID = userID;
     }
+
     public java.lang.String getUserName() {
         return userName;
     }
+
     public void setUserName(java.lang.String userName) {
         if (userType.equalsIgnoreCase("Customer")) {
             System.err.println("You don't have permission to change the username.");
         } else this.userName = userName;
     }
+
     public java.lang.String getUserType() {
         return userType;
     }
+
     public void setUserType(java.lang.String userType) {
         if (userType.equalsIgnoreCase("Customer")) {
             System.err.println("You don't have permission to change the user type.");
         } else this.userType = userType;
     }
+
     public String getUserPassword() {
         return userPassword;
     }
+
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
-    }
-    public static ArrayList<User> getUserList() {
-        return userList;
-    }
-    public static void setUserList(ArrayList<User> userList) {
-        User.userList = userList;
     }
 
     /**
      * Adds a new user with a predefined Customer user type.
      */
-    public static void addUser() {
-        System.out.println("What name do you want to give the user?");
-        String name = sc.nextLine();
-        System.out.println("What password do you want to give the user?");
-        String password = sc.nextLine();
+    public static void addUser(List<User> userList, String name, String password) {
         userList.add(new User(String.valueOf((userList.size() + 1)), name, password));
+    }
+
+    public static void addUser(List<User> userList, String name, String password, String userType) {
+        userList.add(new User(String.valueOf((userList.size() + 1)), name, password, userType));
     }
 
     /**
@@ -94,43 +94,50 @@ public class User {
                 "\nUsertype= " + userType;
     }
 
+    //todo probablement innecessari, es pot esborrar i corregir els altres mètodes
+    public static boolean userExists(List<User> userList, String userName) {
+        for (User currentUser : userList) {
+            if (userName.equals(currentUser.getUserName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int searchUserByName(List<User> userList, String userName) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUserName().equals(userName)) {
+                return i; // Retorna la posició de l'usuari dins la llista
+            }
+        }
+        return -1;
+    }
+
     /**
      * Asks for a user ID to update the user's details.
      */
-    public void updateUser() {
-        System.out.println("Enter the new name: ");
-        userName = sc.nextLine();
-        System.out.println("Enter the new password: ");
-        userPassword = sc.nextLine();
-        boolean validUserType = false;
-
-        //Ensures that the user type is amongst "Customer", "Administrator" or "Librarian".
-        do {
-            System.out.println("Enter the new user type: ");
-            String newUserType = sc.nextLine();
-            if (newUserType.equalsIgnoreCase("Customer") || newUserType.equalsIgnoreCase("Administrator") || newUserType.equalsIgnoreCase("Librarian")) {
-                userType = newUserType;
-                validUserType = true;
-            } else {
-                System.out.println("Invalid user type. Users can only be 'Customer', 'Administrator' or 'Librarian'.");
-            }
-
-        } while (!validUserType);
-
-        System.out.println("User successfully updated.");
-
+    public void updateUser(ArrayList<User> userList, String newName, String newPassword, String newUserType) {
+        if (User.userExists(userList, userName)) {
+            userList.get(User.searchUserByName(userList, userName)).setUserName(newName);
+            userList.get(User.searchUserByName(userList, userName)).setUserPassword(newPassword);
+            userList.get(User.searchUserByName(userList, userName)).setUserType(newUserType);
+        }
     }
 
     /**
      * Removes a user from the system.
      */
-    public void removeUser() {
-        userList.remove(this);
+    public void removeUser(List<User> userList, String userToRemove) {
+        userList.remove(User.searchUserByName(userList,userToRemove));
         System.out.println("User successfully removed.");
     }
 
-    public void addRent() {
-        Publications publication = Publications.searchPublication();
-        userRents.add(new Rent(Rent.rentCount+1, this.User, Date.from(), Date.from()+30));
-    }
+//    public void addRent(List<Rent> rentList) {
+//        //todo fer servir publicationExists() i searchPublicationBy()
+//        // demanar opcions i nom des d'aquí o des del main
+//        // data hauria de ser un String, buscar com es fa
+//        Publication publication = Publication.searchPublication();
+//        rentList.add(new Rent(rentList.size() + 1, this.User, publication, Date.from(), Date.from() + 30));
+//    }
+
 }
