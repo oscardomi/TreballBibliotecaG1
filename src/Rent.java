@@ -1,3 +1,5 @@
+import Users.User;
+
 import java.util.Date;
 
 public class Rent {
@@ -66,7 +68,7 @@ public class Rent {
         return "===== Rent =====\n" +
                 " ID: '" + ID + '\n' +
                 "--------------------\n" +
-                " User: '" + rentUser.getUserName() + '\n' +
+                " Users.User: '" + rentUser.getUserName() + '\n' +
                 "--------------------\n" +
                 " Publication: '" + rentPublication.getName() + '\n' +
                 "--------------------\n" +

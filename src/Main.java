@@ -1,3 +1,5 @@
+import Users.User;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,7 +10,7 @@ public class Main {
     private static final ArrayList<Rent> rentList = new ArrayList<>();
 
     public static void main(String[] args) {
-        userList.add(new User("0", "admin", "admin", "Administrator"));
+        initialiseLists(userList, publicationList);
         logMenu();
 
     }
@@ -34,7 +36,7 @@ public class Main {
                     for (int i = 0; i < userList.size(); i++) {
                         if (userName.equals(userList.get(i).getUserName())) {
                             userFound = true;
-                            System.out.println("User found. Insert password: ");
+                            System.out.println("Users.User found. Insert password: ");
                             String userPassword = sc.nextLine();
                             if (userPassword.equals(userList.get(i).getUserPassword())) {
                                 actionMenu();
@@ -42,7 +44,7 @@ public class Main {
                         }
 
                     }
-                    if (!userFound) System.out.println("User not found.");
+                    if (!userFound) System.out.println("Users.User not found.");
                 }
                 case 2 -> {
                     System.out.println("What name do you want to give the new user?");
@@ -122,7 +124,7 @@ public class Main {
 
                         userList.get(User.searchUserByName(userList, userToUpdate)).updateUser(userList,newUserName,newUserPassword,newUserType);
 
-                    } else System.out.println("User not found.");
+                    } else System.out.println("Users.User not found.");
                 }
 
                 case 3 -> {
@@ -137,7 +139,7 @@ public class Main {
 //                    System.out.println("Which publication do you want to book?");
 //                    String publicationToBook = sc.nextLine();
 //
-//                    userList.get(User.searchUserByName(userList,)).addRent();
+//                    userList.get(Users.User.searchUserByName(userList,)).addRent();
 //                }
 
                 case 5 -> {
@@ -145,5 +147,14 @@ public class Main {
                 }
             }
         } while (option != 5);
+    }
+
+    private static void initialiseLists(ArrayList<User> userList, ArrayList<Publication> publicationList) {
+        userList.add(new User("0", "admin", "admin", "Administrator"));
+        userList.add(new User("1", "Andrea", "1234", "Customer"));
+        userList.add(new User("2", "Miquel", "1234", "Librarian"));
+        publicationList.add(new Publication("1" ,"Romeo and Juliet", "Tragedy", "Book", 1));
+        publicationList.add(new Publication("2" ,"El Capital", "Economy", "Book", 1));
+        publicationList.add(new Publication("3" ,"Shrek 2", "Animation", "Film", 1));
     }
 }
