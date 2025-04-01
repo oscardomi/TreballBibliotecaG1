@@ -9,6 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         userList.add(new User("0", "admin", "admin", "Administrator"));
+
+        //initialiseLists();
+
         logMenu();
 
     }
@@ -37,7 +40,11 @@ public class Main {
                             System.out.println("User found. Insert password: ");
                             String userPassword = sc.nextLine();
                             if (userPassword.equals(userList.get(i).getUserPassword())) {
-                                actionMenu();
+                                if (userList.get(i).isAdmin()) {
+                                    adminActionMenu();
+                                } else if (userList.get(i).isLibrarian()){
+                                    librarianActionMenu();
+                                } else userActionMenu();
                             } else System.out.println("Wrong password.");
                         }
 
@@ -50,7 +57,7 @@ public class Main {
                     System.out.println("What password do you want to give the new user?");
                     String userPassword = sc.nextLine();
                     User.addUser(userList, userName, userPassword);
-                    actionMenu();
+                    adminActionMenu();
                 }
                 case 3 -> System.out.println("Exiting...");
                 default -> System.out.println("Please, insert a valid number.");
@@ -60,7 +67,7 @@ public class Main {
 
     }
 
-    private static void actionMenu() {
+    private static void adminActionMenu() {
         int option;
 
         do {
@@ -120,7 +127,8 @@ public class Main {
 
                         } while (!validUserType);
 
-                        userList.get(User.searchUserByName(userList, userToUpdate)).updateUser(userList,newUserName,newUserPassword,newUserType);
+                        userList.get(User.searchUserByName(userList, userToUpdate))
+                                .updateUser(userList,newUserName,newUserPassword,newUserType);
 
                     } else System.out.println("User not found.");
                 }
@@ -129,7 +137,8 @@ public class Main {
                     System.out.println("What user do you want to remove?");
                     String userToRemove = sc.nextLine();
                     if (User.userExists(userList, userToRemove)) {
-                        userList.get(User.searchUserByName(userList,userToRemove)).removeUser(userList, userToRemove);
+                        userList.get(User.searchUserByName(userList,userToRemove))
+                                .removeUser(userList, userToRemove);
                     } else System.out.println("Unable to find the user.");
                 }
 

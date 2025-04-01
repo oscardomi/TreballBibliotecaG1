@@ -18,7 +18,6 @@ public class Rent {
         this.rentDate = rentDate;
         this.returnDate = returnDate;
     }
-
     public Rent() {
         this.ID = "";
         this.rentUser = null;
@@ -26,7 +25,6 @@ public class Rent {
         this.rentDate = null;
         this.returnDate = null;
     }
-
 
     //Getters and setters
     public String getID() {

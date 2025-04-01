@@ -17,14 +17,12 @@ public class User {
         this.userPassword = "";
         this.userType = "Customer";
     }
-
     public User(String userID, String userName, String userPassword) {
         this.userID = userID;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userType = "Customer";
     }
-
     public User(String userID, String userName, String userPassword, String userType) {
         this.userID = userID;
         this.userName = userName;
@@ -36,37 +34,30 @@ public class User {
     public java.lang.String getUserID() {
         return userID;
     }
-
     public void setUserID(java.lang.String userID) {
         if (userType.equalsIgnoreCase("Customer")) {
             System.err.println("You don't have permission to change the ID.");
         } else this.userID = userID;
     }
-
     public java.lang.String getUserName() {
         return userName;
     }
-
     public void setUserName(java.lang.String userName) {
         if (userType.equalsIgnoreCase("Customer")) {
             System.err.println("You don't have permission to change the username.");
         } else this.userName = userName;
     }
-
     public java.lang.String getUserType() {
         return userType;
     }
-
     public void setUserType(java.lang.String userType) {
         if (userType.equalsIgnoreCase("Customer")) {
             System.err.println("You don't have permission to change the user type.");
         } else this.userType = userType;
     }
-
     public String getUserPassword() {
         return userPassword;
     }
-
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
@@ -132,10 +123,28 @@ public class User {
         System.out.println("User successfully removed.");
     }
 
+    public boolean isAdmin(){
+        if (userType.equals("Administrator")){
+            return true;
+        } else return false;
+    }
+
+    public boolean isLibrarian(){
+        if (userType.equals("Librarian")){
+            return true;
+        } else return false;
+    }
+
+    public boolean isCustomer(){
+        if (userType.equals("Customer")){
+            return true;
+        } else return false;
+    }
+
 //    public void addRent(List<Rent> rentList) {
-//        //todo fer servir publicationExists() i searchPublicationBy()
-//        // demanar opcions i nom des d'aquí o des del main
-//        // data hauria de ser un String, buscar com es fa
+        //todo fer servir publicationExists() i searchPublicationBy()
+        // demanar opcions i nom des d'aquí o des del main
+        // data hauria de ser un String, buscar com es fa
 //        Publication publication = Publication.searchPublication();
 //        rentList.add(new Rent(rentList.size() + 1, this.User, publication, Date.from(), Date.from() + 30));
 //    }
