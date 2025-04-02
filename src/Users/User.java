@@ -1,5 +1,6 @@
+package Users;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -76,7 +77,7 @@ public class User {
     /**
      * Override method that shows a user's information.
      *
-     * @return User's information.
+     * @return Users.User's information.
      */
     @Override
     public String toString() {
@@ -120,7 +121,7 @@ public class User {
      */
     public void removeUser(List<User> userList, String userToRemove) {
         userList.remove(User.searchUserByName(userList,userToRemove));
-        System.out.println("User successfully removed.");
+        System.out.println("Users.User successfully removed.");
     }
 
     public boolean isAdmin(){
@@ -146,7 +147,7 @@ public class User {
         // demanar opcions i nom des d'aquí o des del main
         // data hauria de ser un String, buscar com es fa
 //        Publication publication = Publication.searchPublication();
-//        rentList.add(new Rent(rentList.size() + 1, this.User, publication, Date.from(), Date.from() + 30));
+//        rentList.add(new Rent(rentList.size() + 1, this.Users.User, publication, Date.from(), Date.from() + 30));
 //    }
 
 }
