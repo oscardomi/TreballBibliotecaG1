@@ -41,11 +41,11 @@ public class Main {
                             String userPassword = sc.nextLine();
                             if (userPassword.equals(userList.get(i).getUserPassword())) {
                                 if (userList.get(i).isAdmin()) {
-                                    adminActionMenu();
+                                    actionMenu();
                                 } else if (userList.get(i).isLibrarian()){
-                                    librarianActionMenu();
-                                } else userActionMenu();
-                            } else System.out.println("Wrong password.");
+                                    actionMenu();
+                                } else actionMenu();
+                            } else System.out.println("Wrong passwor    d.");
                         }
 
                     }
