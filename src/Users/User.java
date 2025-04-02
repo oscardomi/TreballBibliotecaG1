@@ -146,7 +146,7 @@ public class User {
         //todo fer servir publicationExists() i searchPublicationBy()
         // demanar opcions i nom des d'aquí o des del main
         // data hauria de ser un String, buscar com es fa
-//        Publication publication = Publication.searchPublication();
+//        Publication.Publication publication = Publication.Publication.searchPublication();
 //        rentList.add(new Rent(rentList.size() + 1, this.Users.User, publication, Date.from(), Date.from() + 30));
 //    }
 

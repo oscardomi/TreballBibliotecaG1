@@ -1,6 +1,7 @@
+package Publication;
+
 import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Publication {
 
@@ -78,7 +79,7 @@ public class Publication {
 
 
         publicationList.add(new Publication(ID, name, genre, type, 1));
-        System.out.println("Publication added successfully!");
+        System.out.println("Publication.Publication added successfully!");
     }
 
     @Override

@@ -1,3 +1,4 @@
+import Publication.Publication;
 import Users.User;
 
 import java.util.Date;
@@ -68,7 +69,7 @@ public class Rent {
                 "--------------------\n" +
                 " Users.User: '" + rentUser.getUserName() + '\n' +
                 "--------------------\n" +
-                " Publication: '" + rentPublication.getName() + '\n' +
+                " Publication.Publication: '" + rentPublication.getName() + '\n' +
                 "--------------------\n" +
                 " Rent date: " + rentDate + '\n' +
                 "--------------------\n" +
