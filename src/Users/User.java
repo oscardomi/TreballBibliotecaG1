@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class User {
-    private String userID;
-    private String userName;
-    private String userPassword;
-    private String userType;
-    private static final Scanner sc = new Scanner(System.in);
+    protected String userID;
+    protected String userName;
+    protected String userPassword;
+    protected String userType;
+    protected static final Scanner sc = new Scanner(System.in);
 
     //Constructors
     public User() {
@@ -70,9 +70,6 @@ public class User {
         userList.add(new User(String.valueOf((userList.size() + 1)), name, password));
     }
 
-    public static void addUser(List<User> userList, String name, String password, String userType) {
-        userList.add(new User(String.valueOf((userList.size() + 1)), name, password, userType));
-    }
 
     /**
      * Override method that shows a user's information.
@@ -104,50 +101,5 @@ public class User {
         }
         return -1;
     }
-
-    /**
-     * Asks for a user ID to update the user's details.
-     */
-    public void updateUser(ArrayList<User> userList, String newName, String newPassword, String newUserType) {
-        if (User.userExists(userList, userName)) {
-            userList.get(User.searchUserByName(userList, userName)).setUserName(newName);
-            userList.get(User.searchUserByName(userList, userName)).setUserPassword(newPassword);
-            userList.get(User.searchUserByName(userList, userName)).setUserType(newUserType);
-        }
-    }
-
-    /**
-     * Removes a user from the system.
-     */
-    public void removeUser(List<User> userList, String userToRemove) {
-        userList.remove(User.searchUserByName(userList,userToRemove));
-        System.out.println("Users.User successfully removed.");
-    }
-
-    public boolean isAdmin(){
-        if (userType.equals("Administrator")){
-            return true;
-        } else return false;
-    }
-
-    public boolean isLibrarian(){
-        if (userType.equals("Librarian")){
-            return true;
-        } else return false;
-    }
-
-    public boolean isCustomer(){
-        if (userType.equals("Customer")){
-            return true;
-        } else return false;
-    }
-
-//    public void addRent(List<Rent> rentList) {
-        //todo fer servir publicationExists() i searchPublicationBy()
-        // demanar opcions i nom des d'aquí o des del main
-        // data hauria de ser un String, buscar com es fa
-//        Publication.Publication publication = Publication.Publication.searchPublication();
-//        rentList.add(new Rent(rentList.size() + 1, this.Users.User, publication, Date.from(), Date.from() + 30));
-//    }
 
 }

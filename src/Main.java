@@ -1,4 +1,5 @@
 import Publication.Publication;
+import Users.Administrator;
 import Users.User;
 
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class Main {
                         }
 
                     } while (!validUserType);
-                    User.addUser(userList, name, password, userType);
+                    Administrator.addUser(userList, name, password, userType);
                 }
 
                 case 2 -> {

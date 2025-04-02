@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class Publication {
 
-    private String ID;
-    private String name;
-    private String genre;
-    private String type;
-    private int quantity;
-    private static Scanner sc = new Scanner(System.in); // Shared scanner
+    protected String ID;
+    protected String name;
+    protected String genre;
+    protected String type;
+    protected int quantity;
+    protected static Scanner sc = new Scanner(System.in); // Shared scanner
 
     // Constructors
     public Publication(String ID, String name, String genre, String type, int quantity) {
