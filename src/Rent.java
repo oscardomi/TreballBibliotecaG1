@@ -1,3 +1,4 @@
+import Publication.Publication;
 import Users.User;
 
 import java.util.Date;
@@ -20,7 +21,6 @@ public class Rent {
         this.rentDate = rentDate;
         this.returnDate = returnDate;
     }
-
     public Rent() {
         this.ID = "";
         this.rentUser = null;
@@ -28,7 +28,6 @@ public class Rent {
         this.rentDate = null;
         this.returnDate = null;
     }
-
 
     //Getters and setters
     public String getID() {
@@ -70,7 +69,7 @@ public class Rent {
                 "--------------------\n" +
                 " Users.User: '" + rentUser.getUserName() + '\n' +
                 "--------------------\n" +
-                " Publication: '" + rentPublication.getName() + '\n' +
+                " Publication.Publication: '" + rentPublication.getName() + '\n' +
                 "--------------------\n" +
                 " Rent date: " + rentDate + '\n' +
                 "--------------------\n" +

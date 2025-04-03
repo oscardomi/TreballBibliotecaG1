@@ -1,3 +1,4 @@
+import Publication.Publication;
 import Users.User;
 
 import java.util.ArrayList;
