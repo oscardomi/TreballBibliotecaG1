@@ -1,3 +1,5 @@
+package Main;
+
 import Publication.Publication;
 import Users.User;
 
@@ -61,17 +63,18 @@ public class Rent {
         this.rentPublication = rentPublication;
     }
 
-    //Override Method that shows the Rent Information
+    //Override Method that shows the Main.Rent Information
     @Override
     public String toString() {
-        return "===== Rent =====\n" +
+        Application.getUserList();
+        return "===== Main.Rent =====\n" +
                 " ID: '" + ID + '\n' +
                 "--------------------\n" +
                 " Users.User: '" + rentUser.getUserName() + '\n' +
                 "--------------------\n" +
                 " Publication.Publication: '" + rentPublication.getName() + '\n' +
                 "--------------------\n" +
-                " Rent date: " + rentDate + '\n' +
+                " Main.Rent date: " + rentDate + '\n' +
                 "--------------------\n" +
                 " Return date: " + returnDate + '\n' +
                 "--------------------\n";

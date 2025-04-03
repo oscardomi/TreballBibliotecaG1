@@ -83,6 +83,13 @@ public class User {
                 "\nUsertype= " + userType;
     }
 
+    public void actionMenu(){}
+
+    public void updateUser(String newUserName, String newUserPassword){
+        this.setUserName(newUserName);
+        this.setUserPassword(newUserPassword);
+    }
+
     //todo probablement innecessari, es pot esborrar i corregir els altres mètodes
     public static boolean userExists(List<User> userList, String userName) {
         for (User currentUser : userList) {
@@ -92,7 +99,13 @@ public class User {
         }
         return false;
     }
-
+    /**
+     * Removes a user from the system.
+     */
+    public void removeUser(List<User> userList, String userToRemove) {
+        userList.remove(User.searchUserByName(userList,userToRemove));
+        System.out.println("User successfully removed.");
+    }
     public static int searchUserByName(List<User> userList, String userName) {
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getUserName().equals(userName)) {
@@ -101,5 +114,7 @@ public class User {
         }
         return -1;
     }
+
+
 
 }
