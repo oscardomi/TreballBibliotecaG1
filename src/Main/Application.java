@@ -1,6 +1,7 @@
 package Main;
 
 import Publication.Publication;
+import Users.Administrator;
 import Users.User;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class Application {
     private static Scanner sc = new Scanner(System.in);
     private static final ArrayList<User> userList = new ArrayList<>();
     private static final ArrayList<Publication> publicationList = new ArrayList<>();
-    private static final ArrayList<Rent> rentList = new ArrayList<>();
+    private static final ArrayList<Lending> lendingList = new ArrayList<>();
 
     public static void main(String[] args) {
         initialiseLists(userList, publicationList);
@@ -39,15 +40,17 @@ public class Application {
                     for (int i = 0; i < userList.size(); i++) {
                         if (userName.equals(userList.get(i).getUserName())) {
                             userFound = true;
-                            System.out.println("Users.User found. Insert password: ");
+                            System.out.println("User found. Insert password: ");
                             String userPassword = sc.nextLine();
                             if (userPassword.equals(userList.get(i).getUserPassword())) {
-                                        userList.get(i).actionMenu();
+                                System.out.println("abans menú");
+                                userList.get(i).actionMenu();
+                                System.out.println("després menú");
                             } else System.out.println("Wrong password.");
                         }
 
                     }
-                    if (!userFound) System.out.println("Users.User not found.");
+                    if (!userFound) System.out.println("User not found.");
                 }
                 case 2 -> {
                     System.out.println("What name do you want to give the new user?");
@@ -70,7 +73,7 @@ public class Application {
     }
 
     private static void initialiseLists(ArrayList<User> userList, ArrayList<Publication> publicationList) {
-        userList.add(new User("0", "admin", "admin", "Administrator"));
+        userList.add(new Administrator("0", "admin", "admin", "Administrator",607352614 , "admin@admin.com"));
         userList.add(new User("1", "Andrea", "1234", "Customer"));
         userList.add(new User("2", "Miquel", "1234", "Librarian"));
         publicationList.add(new Publication("1" ,"Romeo and Juliet", "Tragedy", "Book", 1));

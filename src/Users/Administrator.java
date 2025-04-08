@@ -6,8 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Administrator extends User {
-    public static void addUser(List<User> userList, String name, String password, String userType) {
-        userList.add(new User(String.valueOf((userList.size() + 1)), name, password, userType));
+    private int phoneNumber;
+    private String mail;
+
+
+    public Administrator(String userID, String userName, String userPassword, int phoneNumber, String mail) {
+        super(userID, userName, userPassword);
+        this.phoneNumber = phoneNumber;
+        this.mail = mail;
+    }
+
+    public Administrator(String userID, String userName, String userPassword, String userType, int phoneNumber, String mail) {
+        super(userID, userName, userPassword, userType);
+        this.phoneNumber = phoneNumber;
+        this.mail = mail;
+    }
+
+    public static void addUser(List<User> userList, String name, String password, String userType,  int phoneNumber, String mail) {
+        if (userType.equalsIgnoreCase("Customer")){
+            userList.add(new Customer(String.valueOf((userList.size() + 1)), name, password));
+        } else if (userType.equalsIgnoreCase("Administrator")){
+            userList.add(new Administrator(String.valueOf((userList.size() + 1)), name, password, phoneNumber, mail));
+
+        }
     }
 
     /**
@@ -18,11 +39,8 @@ public class Administrator extends User {
             userList.get(User.searchUserByName(userList, userName)).setUserName(newName);
             userList.get(User.searchUserByName(userList, userName)).setUserPassword(newPassword);
             userList.get(User.searchUserByName(userList, userName)).setUserType(newUserType);
+            System.out.println("User successfully updated.");
         }
-    }
-
-    public static void updateUser(User user, String newName, String newPassword, String newUserType){
-
     }
 
     /**
@@ -33,6 +51,7 @@ public class Administrator extends User {
         System.out.println("User successfully removed.");
     }
 
+    @Override
     public void actionMenu() {
         int option;
 
@@ -66,7 +85,14 @@ public class Administrator extends User {
                         }
 
                     } while (!validUserType);
-                    Administrator.addUser(Application.getUserList(), name, password, userType);
+                    //todo
+                    if (userType.equalsIgnoreCase("Customer")){
+                        Administrator.addCustomer(Application.getUserList(), name, password, userType);
+                    } else if (userType.equalsIgnoreCase("Administrator")){
+                        Administrator.addUser(Application.getUserList(), name, password, userType);
+                    } else {
+                        Administrator.addLibrarian(Application.getUserList(), name, password, userType);
+                    }
                 }
 
                 case 2 -> {
@@ -93,7 +119,7 @@ public class Administrator extends User {
 
                         } while (!validUserType);
 
-                        Application.getUserList().get(User.searchUserByName(Application.getUserList(), userToUpdate)).updateUser(Application.getUserList(),newUserName,newUserPassword,newUserType);
+                        Application.getUserList().get(User.searchUserByName(Application.getUserList(), userToUpdate)).updateUser(newUserName,newUserPassword,newUserType);
 
                     } else System.out.println("User not found.");
                 }

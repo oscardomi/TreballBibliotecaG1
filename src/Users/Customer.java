@@ -1,7 +1,7 @@
 package Users;
 
 public class Customer extends User{
-    //public void addRent(List<Main.Rent> rentList) {
+    //public void addLending(List<Lending> lendingList) {
         //todo fer servir publicationExists() i searchPublicationBy()
         // demanar opcions i nom des d'aquí o des del main
         // data hauria de ser un String, buscar com es fa

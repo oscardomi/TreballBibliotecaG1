@@ -8,6 +8,7 @@ public class User {
     protected String userID;
     protected String userName;
     protected String userPassword;
+    //todo esborrar userType
     protected String userType;
     protected static final Scanner sc = new Scanner(System.in);
 
@@ -52,9 +53,7 @@ public class User {
         return userType;
     }
     public void setUserType(java.lang.String userType) {
-        if (userType.equalsIgnoreCase("Customer")) {
-            System.err.println("You don't have permission to change the user type.");
-        } else this.userType = userType;
+        this.userType = userType;
     }
     public String getUserPassword() {
         return userPassword;
@@ -88,6 +87,12 @@ public class User {
     public void updateUser(String newUserName, String newUserPassword){
         this.setUserName(newUserName);
         this.setUserPassword(newUserPassword);
+    }
+
+    public void updateUser(String newUserName, String newUserPassword, String newUserType){
+        this.setUserName(newUserName);
+        this.setUserPassword(newUserPassword);
+        this.setUserType(newUserType);
     }
 
     //todo probablement innecessari, es pot esborrar i corregir els altres mètodes
