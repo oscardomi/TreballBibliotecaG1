@@ -130,14 +130,7 @@ public class Administrator extends User {
                     } else System.out.println("Unable to find the user.");
                 }
 
-//                case 4 -> {
-//                    System.out.println("Which publication do you want to book?");
-//                    String publicationToBook = sc.nextLine();
-//
-//                    userList.get(Users.User.searchUserByName(userList,)).addRent();
-//                }
-
-                case 5 -> {
+                case 4 -> {
                     System.out.println("Exiting...");
                 }
             }
