@@ -16,29 +16,14 @@ public class Administrator extends User {
         this.mail = mail;
     }
 
-    public Administrator(String userID, String userName, String userPassword, String userType, int phoneNumber, String mail) {
-        super(userID, userName, userPassword, userType);
-        this.phoneNumber = phoneNumber;
-        this.mail = mail;
-    }
-
-    public static void addUser(List<User> userList, String name, String password, String userType,  int phoneNumber, String mail) {
-        if (userType.equalsIgnoreCase("Customer")){
-            userList.add(new Customer(String.valueOf((userList.size() + 1)), name, password));
-        } else if (userType.equalsIgnoreCase("Administrator")){
-            userList.add(new Administrator(String.valueOf((userList.size() + 1)), name, password, phoneNumber, mail));
-
-        }
-    }
 
     /**
      * Asks for a user ID to update the user's details.
      */
-    public void updateUser(ArrayList<User> userList, String newName, String newPassword, String newUserType) {
+    public void updateUser(ArrayList<User> userList, String newName, String newPassword) {
         if (User.userExists(userList, userName)) {
             userList.get(User.searchUserByName(userList, userName)).setUserName(newName);
             userList.get(User.searchUserByName(userList, userName)).setUserPassword(newPassword);
-            userList.get(User.searchUserByName(userList, userName)).setUserType(newUserType);
             System.out.println("User successfully updated.");
         }
     }
@@ -87,11 +72,38 @@ public class Administrator extends User {
                     } while (!validUserType);
                     //todo
                     if (userType.equalsIgnoreCase("Customer")){
-                        Administrator.addCustomer(Application.getUserList(), name, password, userType);
+                        System.out.println("Enter the address:");
+                        String address = sc.nextLine();
+                        boolean validOption = false;
+                        String membershipAux;
+                        boolean membership = false;
+                        do {
+                            System.out.println("Will the new user be a member? (Y/N)");
+                            membershipAux = sc.nextLine();
+                            if (membershipAux.equalsIgnoreCase("Y")){
+                                validOption=true;
+                                membership=true;
+                            } else if (membershipAux.equalsIgnoreCase("N")) {
+                                validOption= true;
+                                membership=false;
+                            } else System.out.println("Enter a valid option.");
+                        } while(!validOption);
+                        User.addCustomer(Application.getUserList(), name, password, address, membership);
+
                     } else if (userType.equalsIgnoreCase("Administrator")){
-                        Administrator.addUser(Application.getUserList(), name, password, userType);
+                        //todo comprovar que el telèfon i mail siguin vàlids
+                        System.out.println("Enter a phone number: ");
+                        int phoneNumber = Integer.parseInt(sc.nextLine());
+                        System.out.println("Enter a mail:");
+                        String mail = sc.nextLine();
+                        User.addAdministrator(Application.getUserList(), name, password, phoneNumber,mail);
+
                     } else {
-                        Administrator.addLibrarian(Application.getUserList(), name, password, userType);
+                        System.out.println("Enter the shift: ");
+                        String shift = sc.nextLine();
+                        System.out.println("Enter the salary: ");
+                        double salary = Double.parseDouble(sc.nextLine());
+                        User.addLibrarian(Application.getUserList(), name, password, shift, salary);
                     }
                 }
 
@@ -105,21 +117,7 @@ public class Administrator extends User {
                         System.out.println("Enter the new password: ");
                         String newUserPassword = sc.nextLine();
 
-                        //todo crear mètode per desduplicar codi
-                        String newUserType;
-                        boolean validUserType = false;
-                        do {
-                            System.out.println("Enter the new user type: ");
-                            newUserType = sc.nextLine();
-                            if (newUserType.equalsIgnoreCase("Customer") || newUserType.equalsIgnoreCase("Administrator") || newUserType.equalsIgnoreCase("Librarian")) {
-                                validUserType = true;
-                            } else {
-                                System.out.println("Invalid user type. Users can only be 'Customer', 'Administrator' or 'Librarian'.");
-                            }
-
-                        } while (!validUserType);
-
-                        Application.getUserList().get(User.searchUserByName(Application.getUserList(), userToUpdate)).updateUser(newUserName,newUserPassword,newUserType);
+                        Application.getUserList().get(User.searchUserByName(Application.getUserList(), userToUpdate)).updateUser(newUserName,newUserPassword);
 
                     } else System.out.println("User not found.");
                 }

@@ -9,7 +9,6 @@ public class User {
     protected String userName;
     protected String userPassword;
     //todo esborrar userType
-    protected String userType;
     protected static final Scanner sc = new Scanner(System.in);
 
     //Constructors
@@ -17,19 +16,11 @@ public class User {
         this.userID = "";
         this.userName = "";
         this.userPassword = "";
-        this.userType = "Customer";
     }
     public User(String userID, String userName, String userPassword) {
         this.userID = userID;
         this.userName = userName;
         this.userPassword = userPassword;
-        this.userType = "Customer";
-    }
-    public User(String userID, String userName, String userPassword, String userType) {
-        this.userID = userID;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userType = userType;
     }
 
     //Getters and setters
@@ -37,23 +28,13 @@ public class User {
         return userID;
     }
     public void setUserID(java.lang.String userID) {
-        if (userType.equalsIgnoreCase("Customer")) {
-            System.err.println("You don't have permission to change the ID.");
-        } else this.userID = userID;
+        this.userID = userID;
     }
     public java.lang.String getUserName() {
         return userName;
     }
     public void setUserName(java.lang.String userName) {
-        if (userType.equalsIgnoreCase("Customer")) {
-            System.err.println("You don't have permission to change the username.");
-        } else this.userName = userName;
-    }
-    public java.lang.String getUserType() {
-        return userType;
-    }
-    public void setUserType(java.lang.String userType) {
-        this.userType = userType;
+        this.userName = userName;
     }
     public String getUserPassword() {
         return userPassword;
@@ -85,8 +66,7 @@ public class User {
     @Override
     public String toString() {
         return "UserID: " + userID +
-                "\nUsername= " + userName +
-                "\nUsertype= " + userType;
+                "\nUsername= " + userName;
     }
 
     public void actionMenu(){}
@@ -94,12 +74,6 @@ public class User {
     public void updateUser(String newUserName, String newUserPassword){
         this.setUserName(newUserName);
         this.setUserPassword(newUserPassword);
-    }
-
-    public void updateUser(String newUserName, String newUserPassword, String newUserType){
-        this.setUserName(newUserName);
-        this.setUserPassword(newUserPassword);
-        this.setUserType(newUserType);
     }
 
     //todo probablement innecessari, es pot esborrar i corregir els altres mètodes

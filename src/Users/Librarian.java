@@ -1,12 +1,12 @@
 package Users;
 
 public class Librarian extends User{
-    private String schedule;
+    private String shift;
     private double salary;
 
-    public Librarian(String userID, String userName, String userPassword, String schedule, double salary) {
+    public Librarian(String userID, String userName, String userPassword, String shift, double salary) {
         super(userID, userName, userPassword);
-        this.schedule = schedule;
+        this.shift = shift;
         this.salary = salary;
     }
 

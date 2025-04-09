@@ -2,6 +2,7 @@ package Main;
 
 import Publication.Publication;
 import Users.Administrator;
+import Users.Customer;
 import Users.User;
 
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ public class Application {
                     if (!userFound) System.out.println("User not found.");
                 }
                 case 2 -> {
+                    //todo posar tot això en un mètode, es repeteix a afegir usuari d'administrador
                     System.out.println("What name do you want to give the new user?");
                     String userName = sc.nextLine();
                     System.out.println("What password do you want to give the new user?");
@@ -61,20 +63,20 @@ public class Application {
                     String userAddress = sc.nextLine();
                     boolean validOption = false;
                     String membershipAux;
-                    boolean userMembership = false;
+                    boolean membership = false;
                     do {
                         System.out.println("Do you want to be a member? (Y/N)");
                         membershipAux = sc.nextLine();
                         if (membershipAux.equalsIgnoreCase("Y")){
                             validOption=true;
-                            userMembership=true;
+                            membership=true;
                         } else if (membershipAux.equalsIgnoreCase("N")) {
                             validOption= true;
-                            userMembership=false;
+                            membership=false;
                         } else System.out.println("Enter a valid option.");
                     } while(!validOption);
 
-                    User.addCustomer(userList, userName, userPassword, userAddress, userMembership);
+                    User.addCustomer(userList, userName, userPassword, userAddress, membership);
                     userList.getLast().actionMenu();
                 }
                 case 3 -> System.out.println("Exiting...");
@@ -90,9 +92,9 @@ public class Application {
     }
 
     private static void initialiseLists(ArrayList<User> userList, ArrayList<Publication> publicationList) {
-        userList.add(new Administrator("0", "admin", "admin", "Administrator",607352614 , "admin@admin.com"));
-        userList.add(new User("1", "Andrea", "1234", "Customer"));
-        userList.add(new User("2", "Miquel", "1234", "Librarian"));
+        userList.add(new Administrator("0", "admin", "admin", 607352614 , "admin@admin.com"));
+        userList.add(new Customer("1", "Andrea", "1234", "c/Major", false));
+        userList.add(new Customer("2", "Miquel", "1234", "av. Diagonal", true));
         publicationList.add(new Publication("1" ,"Romeo and Juliet", "Tragedy", "Book", 1));
         publicationList.add(new Publication("2" ,"El Capital", "Economy", "Book", 1));
         publicationList.add(new Publication("3" ,"Shrek 2", "Animation", "Film", 1));
