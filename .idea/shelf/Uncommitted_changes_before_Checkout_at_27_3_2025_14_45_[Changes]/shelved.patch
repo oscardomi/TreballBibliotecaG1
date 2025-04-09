@@ -1,0 +1,35 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//TIP To <b>Run</b> code, press <shortcut actionId=\"Run\"/> or\r\n// click the <icon src=\"AllIcons.Actions.Execute\"/> icon in the gutter.\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        //TIP Press <shortcut actionId=\"ShowIntentionActions\"/> with your caret at the highlighted text\r\n        // to see how IntelliJ IDEA suggests fixing it.\r\n        System.out.printf(\"Hello and welcome!\");\r\n\r\n        for (int i = 1; i <= 5; i++) {\r\n            //TIP Press <shortcut actionId=\"Debug\"/> to start debugging your code. We have set one <icon src=\"AllIcons.Debugger.Db_set_breakpoint\"/> breakpoint\r\n            // for you, but you can always add more by pressing <shortcut actionId=\"ToggleLineBreakpoint\"/>.\r\n            System.out.println(\"i = \" + i);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision f2f6e3fd8e6c970251a0628bc08c3ce87ab68591)
++++ b/src/Main.java	(date 1743083068591)
+@@ -2,14 +2,15 @@
+ // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+ public class Main {
+     public static void main(String[] args) {
+-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
+-        // to see how IntelliJ IDEA suggests fixing it.
+-        System.out.printf("Hello and welcome!");
++        User.addUser();
++        System.out.println(User.userList.get(0).getUserName());
++        User.userList.get(0).removeUser();
++        System.out.println(User.userList.get(0).getUserName());
+ 
+-        for (int i = 1; i <= 5; i++) {
+-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
+-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
+-            System.out.println("i = " + i);
+-        }
++        User u1 = new User("2", "Josefina", "Administrator");
++        System.out.println(u1.getUserName());
++        u1.removeUser();
++        System.out.println(u1.getUserName());
++
+     }
+ }
+\ No newline at end of file
