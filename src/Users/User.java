@@ -65,10 +65,17 @@ public class User {
     /**
      * Adds a new user with a predefined Customer user type.
      */
-    public static void addUser(List<User> userList, String name, String password) {
-        userList.add(new User(String.valueOf((userList.size() + 1)), name, password));
+    public static void addCustomer(List<User> userList, String name, String password, String address, boolean membership) {
+        userList.add(new Customer(String.valueOf((userList.size() + 1)), name, password, address, membership));
     }
 
+    public static void addAdministrator(List<User> userList, String name, String password, int phoneNumber, String mail) {
+        userList.add(new Administrator(String.valueOf((userList.size() + 1)), name, password, phoneNumber, mail));
+    }
+
+    public static void addLibrarian(List<User> userList, String name, String password, String schedule, double salary) {
+        userList.add(new Librarian(String.valueOf((userList.size() + 1)), name, password, schedule, salary));
+    }
 
     /**
      * Override method that shows a user's information.

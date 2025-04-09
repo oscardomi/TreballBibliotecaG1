@@ -57,7 +57,24 @@ public class Application {
                     String userName = sc.nextLine();
                     System.out.println("What password do you want to give the new user?");
                     String userPassword = sc.nextLine();
-                    User.addUser(userList, userName, userPassword);
+                    System.out.println("What address do you want to give the new user?");
+                    String userAddress = sc.nextLine();
+                    boolean validOption = false;
+                    String membershipAux;
+                    boolean userMembership = false;
+                    do {
+                        System.out.println("Do you want to be a member? (Y/N)");
+                        membershipAux = sc.nextLine();
+                        if (membershipAux.equalsIgnoreCase("Y")){
+                            validOption=true;
+                            userMembership=true;
+                        } else if (membershipAux.equalsIgnoreCase("N")) {
+                            validOption= true;
+                            userMembership=false;
+                        } else System.out.println("Enter a valid option.");
+                    } while(!validOption);
+
+                    User.addCustomer(userList, userName, userPassword, userAddress, userMembership);
                     userList.getLast().actionMenu();
                 }
                 case 3 -> System.out.println("Exiting...");
