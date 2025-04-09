@@ -7,30 +7,22 @@ import java.util.List;
 import java.util.Scanner;
 
 public class User {
-    private String userID;
-    private String userName;
-    private String userPassword;
-    private String userType;
-    private static final Scanner sc = new Scanner(System.in);
+    protected String userID;
+    protected String userName;
+    protected String userPassword;
+    //todo esborrar userType
+    protected static final Scanner sc = new Scanner(System.in);
 
     //Constructors
     public User() {
         this.userID = "";
         this.userName = "";
         this.userPassword = "";
-        this.userType = "Customer";
     }
     public User(String userID, String userName, String userPassword) {
         this.userID = userID;
         this.userName = userName;
         this.userPassword = userPassword;
-        this.userType = "Customer";
-    }
-    public User(String userID, String userName, String userPassword, String userType) {
-        this.userID = userID;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userType = userType;
     }
 
     //Getters and setters
@@ -38,25 +30,13 @@ public class User {
         return userID;
     }
     public void setUserID(java.lang.String userID) {
-        if (userType.equalsIgnoreCase("Customer")) {
-            System.err.println("You don't have permission to change the ID.");
-        } else this.userID = userID;
+        this.userID = userID;
     }
     public java.lang.String getUserName() {
         return userName;
     }
     public void setUserName(java.lang.String userName) {
-        if (userType.equalsIgnoreCase("Customer")) {
-            System.err.println("You don't have permission to change the username.");
-        } else this.userName = userName;
-    }
-    public java.lang.String getUserType() {
-        return userType;
-    }
-    public void setUserType(java.lang.String userType) {
-        if (userType.equalsIgnoreCase("Customer")) {
-            System.err.println("You don't have permission to change the user type.");
-        } else this.userType = userType;
+        this.userName = userName;
     }
     public String getUserPassword() {
         return userPassword;
@@ -68,12 +48,16 @@ public class User {
     /**
      * Adds a new user with a predefined Customer user type.
      */
-    public static void addUser(List<User> userList, String name, String password) {
-        userList.add(new User(String.valueOf((userList.size() + 1)), name, password));
+    public static void addCustomer(List<User> userList, String name, String password, String address, boolean membership) {
+        userList.add(new Customer(String.valueOf((userList.size() + 1)), name, password, address, membership));
     }
 
-    public static void addUser(List<User> userList, String name, String password, String userType) {
-        userList.add(new User(String.valueOf((userList.size() + 1)), name, password, userType));
+    public static void addAdministrator(List<User> userList, String name, String password, int phoneNumber, String mail) {
+        userList.add(new Administrator(String.valueOf((userList.size() + 1)), name, password, phoneNumber, mail));
+    }
+
+    public static void addLibrarian(List<User> userList, String name, String password, String schedule, double salary) {
+        userList.add(new Librarian(String.valueOf((userList.size() + 1)), name, password, schedule, salary));
     }
 
     /**
@@ -84,8 +68,14 @@ public class User {
     @Override
     public String toString() {
         return "UserID: " + userID +
-                "\nUsername= " + userName +
-                "\nUsertype= " + userType;
+                "\nUsername= " + userName;
+    }
+
+    public void actionMenu(){}
+
+    public void updateUser(String newUserName, String newUserPassword){
+        this.setUserName(newUserName);
+        this.setUserPassword(newUserPassword);
     }
 
     //todo probablement innecessari, es pot esborrar i corregir els altres mètodes
@@ -97,7 +87,13 @@ public class User {
         }
         return false;
     }
-
+    /**
+     * Removes a user from the system.
+     */
+    public void removeUser(List<User> userList, String userToRemove) {
+        userList.remove(User.searchUserByName(userList,userToRemove));
+        System.out.println("User successfully removed.");
+    }
     public static int searchUserByName(List<User> userList, String userName) {
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getUserName().equals(userName)) {
@@ -107,50 +103,7 @@ public class User {
         return -1;
     }
 
-    /**
-     * Asks for a user ID to update the user's details.
-     */
-    public void updateUser(ArrayList<User> userList, String newName, String newPassword, String newUserType) {
-        if (User.userExists(userList, userName)) {
-            userList.get(User.searchUserByName(userList, userName)).setUserName(newName);
-            userList.get(User.searchUserByName(userList, userName)).setUserPassword(newPassword);
-            userList.get(User.searchUserByName(userList, userName)).setUserType(newUserType);
-        }
-    }
 
-    /**
-     * Removes a user from the system.
-     */
-    public void removeUser(List<User> userList, String userToRemove) {
-        userList.remove(User.searchUserByName(userList,userToRemove));
-        System.out.println("Users.User successfully removed.");
-    }
-
-    public boolean isAdmin(){
-        if (userType.equals("Administrator")){
-            return true;
-        } else return false;
-    }
-
-    public boolean isLibrarian(){
-        if (userType.equals("Librarian")){
-            return true;
-        } else return false;
-    }
-
-    public boolean isCustomer(){
-        if (userType.equals("Customer")){
-            return true;
-        } else return false;
-    }
-
-//    public void addRent(List<Rent> rentList) {
-        //todo fer servir publicationExists() i searchPublicationBy()
-        // demanar opcions i nom des d'aquí o des del main
-        // data hauria de ser un String, buscar com es fa
-//        Publication.Publication publication = Publication.Publication.searchPublication();
-//        rentList.add(new Rent(rentList.size() + 1, this.Users.User, publication, Date.from(), Date.from() + 30));
-//    }
 
 
     public static void actionMenu() {
