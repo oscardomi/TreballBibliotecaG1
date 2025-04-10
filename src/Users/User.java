@@ -71,8 +71,6 @@ public class User {
                 "\nUsername= " + userName;
     }
 
-    public void actionMenu(){}
-
     public void updateUser(String newUserName, String newUserPassword){
         this.setUserName(newUserName);
         this.setUserPassword(newUserPassword);
@@ -94,6 +92,9 @@ public class User {
         userList.remove(User.searchUserByName(userList,userToRemove));
         System.out.println("User successfully removed.");
     }
+    public void actionMenu(){
+
+    }
     public static int searchUserByName(List<User> userList, String userName) {
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getUserName().equals(userName)) {
@@ -101,96 +102,6 @@ public class User {
             }
         }
         return -1;
-    }
-
-
-
-
-    public static void actionMenu() {
-        int option;
-
-        do {
-            System.out.println("Insert an option: ");
-            System.out.println("1. Add user");
-            System.out.println("2. Update user");
-            System.out.println("3. Remove user");
-            System.out.println("4. Borrow publication");
-            System.out.println("5. Exit");
-            System.out.println("=========================");
-            option = Integer.parseInt(sc.nextLine());
-
-            switch (option) {
-                case 1 -> {
-                    System.out.println("What name do you want to give the new user?");
-                    String name = sc.nextLine();
-                    System.out.println("What password do you want to give the new user?");
-                    String password = sc.nextLine();
-
-                    //todo crear mètode per desduplicar codi
-                    boolean validUserType = false;
-                    String userType;
-                    do {
-                        System.out.println("Enter the new user type: ");
-                        userType = sc.nextLine();
-                        if (userType.equalsIgnoreCase("Customer") || userType.equalsIgnoreCase("Administrator") || userType.equalsIgnoreCase("Librarian")) {
-                            validUserType = true;
-                        } else {
-                            System.out.println("Invalid user type. Users can only be 'Customer', 'Administrator' or 'Librarian'.");
-                        }
-
-                    } while (!validUserType);
-                    User.addUser(userList, name, password, userType);
-                }
-
-                case 2 -> {
-                    System.out.println("Enter the name of the user that you want to update: ");
-                    String userToUpdate = sc.nextLine();
-
-                    if (User.userExists(userList,userToUpdate)){
-                        System.out.println("Enter the new name: ");
-                        String newUserName = sc.nextLine();
-                        System.out.println("Enter the new password: ");
-                        String newUserPassword = sc.nextLine();
-
-                        //todo crear mètode per desduplicar codi
-                        String newUserType;
-                        boolean validUserType = false;
-                        do {
-                            System.out.println("Enter the new user type: ");
-                            newUserType = sc.nextLine();
-                            if (newUserType.equalsIgnoreCase("Customer") || newUserType.equalsIgnoreCase("Administrator") || newUserType.equalsIgnoreCase("Librarian")) {
-                                validUserType = true;
-                            } else {
-                                System.out.println("Invalid user type. Users can only be 'Customer', 'Administrator' or 'Librarian'.");
-                            }
-
-                        } while (!validUserType);
-
-                        userList.get(User.searchUserByName(userList, userToUpdate)).updateUser(userList,newUserName,newUserPassword,newUserType);
-
-                    } else System.out.println("Users.User not found.");
-                }
-
-                case 3 -> {
-                    System.out.println("What user do you want to remove?");
-                    String userToRemove = sc.nextLine();
-                    if (User.userExists(userList, userToRemove)) {
-                        userList.get(User.searchUserByName(userList,userToRemove)).removeUser(userList, userToRemove);
-                    } else System.out.println("Unable to find the user.");
-                }
-
-//                case 4 -> {
-//                    System.out.println("Which publication do you want to book?");
-//                    String publicationToBook = sc.nextLine();
-//
-//                    userList.get(Users.User.searchUserByName(userList,)).addRent();
-//                }
-
-                case 5 -> {
-                    System.out.println("Exiting...");
-                }
-            }
-        } while (option != 5);
     }
 
 }

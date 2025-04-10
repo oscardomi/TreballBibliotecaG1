@@ -44,9 +44,7 @@ public class Application {
                             System.out.println("User found. Insert password: ");
                             String userPassword = sc.nextLine();
                             if (userPassword.equals(userList.get(i).getUserPassword())) {
-                                System.out.println("abans menú");
                                 userList.get(i).actionMenu();
-                                System.out.println("després menú");
                             } else System.out.println("Wrong password.");
                         }
 
@@ -72,7 +70,6 @@ public class Application {
                             membership=true;
                         } else if (membershipAux.equalsIgnoreCase("N")) {
                             validOption= true;
-                            membership=false;
                         } else System.out.println("Enter a valid option.");
                     } while(!validOption);
 
@@ -90,6 +87,13 @@ public class Application {
     public static ArrayList<User> getUserList() {
         return userList;
     }
+    public static ArrayList<Publication> getPublicationList() {
+        return publicationList;
+    }
+    public static ArrayList<Lending> getLendingList() {
+        return lendingList;
+    }
+
 
     private static void initialiseLists(ArrayList<User> userList, ArrayList<Publication> publicationList) {
         userList.add(new Administrator("0", "admin", "admin", 607352614 , "admin@admin.com"));
